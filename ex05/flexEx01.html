@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .container {
+      }
+
+      .item {
+        width: 100px;
+        height: 100px;
+        background-color: brown;
+      }
+
+      .wrap {
+        background-color: aquamarine;
+        width: 800px;
+        height: 800px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-around;
+        gap: 2px;
+        flex-wrap: wrap;
+      }
+      .alignstart {
+        align-items: flex-start;
+      }
+      .alignend {
+        align-items: flex-end;
+      }
+      .aligncenter {
+        align-items: center;
+      }
+      .justifystart {
+        justify-content: flex-start;
+      }
+      .justifyend {
+        justify-content: flex-end;
+      }
+      .justifycenter {
+        justify-content: center;
+      }
+
+      .blue {
+        background-color: blue;
+      }
+
+      .red {
+        background-color: red;
+      }
+      .green {
+        background-color: green;
+      }
+
+      .wrap > div {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        /* background-color: brown; */
+        font-size: 50px;
+        font-weight: bold;
+        color: white;
+      }
+    </style>
+
+    <div class="container">
+      <div class="wrap">
+        <div class="red">A</div>
+        <div class="blue">B</div>
+        <div class="green">C</div>
+        <div class="blue">D</div>
+        <div class="green">E</div>
+        <div class="blue">F</div>
+        <div class="red">A</div>
+        <div class="blue">B</div>
+        <div class="green">C</div>
+        <div class="blue">D</div>
+        <div class="green">E</div>
+        <div class="blue">F</div>
+        <div class="green">C</div>
+        <div class="blue">D</div>
+
+      </div>
+    </div>
+  </body>
+</html>

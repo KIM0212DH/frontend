@@ -1,0 +1,44 @@
+.jua-regular {
+  font-family: "Jua", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+}
+
+.elipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+p:hover {
+  color: blue;
+}
+p::first-letter {
+  font-weight: bold;
+}
+/* p::first-line {
+  color: rebeccapurple;
+} */
+
+:first-child
+:nth-child()
+:nth-last-child()
+li:first-child {
+  font-weight: bold;
+}
+#buttonid:hover {
+  color: red;
+  background-color: pink;
+}
+
+li:first-child > a {
+    color:red;
+}
+
+p:active{
+    color:green;
+}

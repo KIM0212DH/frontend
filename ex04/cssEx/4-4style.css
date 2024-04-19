@@ -1,0 +1,18 @@
+p{
+    padding: 100px 100px;
+    background-color: yellow;
+    margin: 0 0 0 0;
+    border-width: 2px;
+    border-color: black;
+    border-style:  solid;
+}
+.p1{
+    width:400px;
+    margin:auto;
+    background-color: yellow;
+}
+.p2{
+    width: 400px;
+    margin: auto 0 auto auto;
+    background-color: aqua;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .one {
+        /*position:relative;  three가 one을 기준으로 중앙*/
+        background-color: rgb(4, 12, 19);
+        width: 500px;
+        height: 500px;
+      }
+      .two {
+        position: relative; /*three가 two를 기준으로 중앙 */
+        background-color: aqua;
+        width: 300px;
+        height: 300px;
+      }
+      .three {
+        background-color: brown;
+        width: 100px;
+        height: 100px;
+        position: absolute; /* 제일 위의 조상이 body 태그여서 body를 기준으로 위치 잡음 */
+        top: 50%;
+        left: 50%;
+      }
+
+      .container {
+        position: relative;
+        text-align: center;
+      }
+      .text {
+        position: absolute;
+        top: 85%;
+        left: 50%;
+        background-color: yellow;
+        color: blue;
+        font-size: 100px;
+        font-weight: bold;
+        z-index: 100;
+      }
+    </style>
+
+    <div class="one">
+      <div class="two">
+        <div class="three"></div>
+      </div>
+    </div>
+
+    <br /><br /><br />
+    <div class="container">
+      <img
+        src="https://cdn.pixabay.com/photo/2016/10/26/22/02/dog-1772759_1280.jpg"
+        alt="개"
+      />
+      <div class="text">멍</div>
+    </div>
+  </body>
+</html>
