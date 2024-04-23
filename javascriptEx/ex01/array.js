@@ -114,26 +114,98 @@ function foo(a, b, c) {
 }
 foo("a", "b", "c");
 
-function foo(a, b, c) { //유사 객체는 내장 메서드 사용 불가
+function foo(a, b, c) {
+  //유사 객체는 내장 메서드 사용 불가
   arguments.forEach((arg) => {
     console.log(arg);
   });
 }
 foo("a", "b", "c");
 
-function foo(a,b,c){
-    Array.prototype.forEach.call(arguments, (arg) => {
-        console.log(arg);
-    })
+function foo(a, b, c) {
+  Array.prototype.forEach.call(arguments, (arg) => {
+    console.log(arg);
+  });
 }
-foo('a','b','c');
+foo("a", "b", "c");
 
 let a = 10;
+let b = new Number(10);
+console.log(typeof a);
+console.log(typeof b);
+
+const str = new String("javascript");
+console.log(typeof str);
+
+const num = new Number(11);
+console.log(num.valueOf());
+
+let sum = 0;
+for (let i = 0; i < 101; i++) {
+  if (i % 2 == 0) {
+    sum += i;
+  }
+}
+console.log(sum);
+
+for (let i = 2; i < 10; i++) {
+  for (let j = 1; j < 10; j++) {
+    console.log(i, " * ", j, "=", i * j);
+  }
+}
+
+let sum = 0;
+for (let i = 0; i < 100; i++) {
+  if (i % 3 == 0) {
+    sum += i;
+  } else if (i % 5 == 0) {
+    sum += i;
+  }
+}
+console.log(sum);
+
+for (let i = 0; i < 101; i++) {
+    i2str = i.toString();
+    
+    if (i2str.includes('3')){
+        console.log("짝")
+    }
+    else{
+        console.log(i2str);
+    }
+}
+
+result1 = 10 || 100;
+console.log(result1)
+
+result2 = 0 && 100;
+console.log(result2)
+
+reuslt3 = null || 100;
+console.log(reuslt3);
+
+result4 = null && 100;
+console.log(result4)
+
+username = 'poly';
+result5 = username || "유저 이름이 없습니다.";
+console.log(result5);
+
+username= undefined;
+result6 = username || "유저 이름이 없습니다.";
+console.log(result6)
 
 
+let result1;
+let result2 = result1 ?? 100;
+
+let result3 = 10;
+let result4 = result3 ?? 100;
+
+let result5 = null;
+let result6 = result5 ?? 100;
 
 
-
-
-
-
+console.log(1 == true);
+console.log(1 === true);
+console.log(1 === 1);
