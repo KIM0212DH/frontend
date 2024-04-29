@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- <select >
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+    </select>
+    
+    <script>
+        const select = document.querySelector('select');
+        console.log(select instanceof EventTarget);
+        console.log(select instanceof Node);
+        console.log(select instanceof Element);
+        console.log(select instanceof HTMLElement);
+        console.log(select instanceof HTMLSelectElement);
+        console.log(select instanceof HTMLInputElement);
+    </script> -->
+
+        <!-- <input type="checkbox" name="check" id="check" checked>자바스크립트가 좋다.
+    <script>
+        const select = document.querySelector('input');
+        console.log(select.checked);
+    </script> -->
+
+        <!-- <div>
+    <h1>리스트 시작</h1>
+    <ol id="ol-id">
+        <li class="first">1</li>
+        <li class="second">2</li>
+        <li class="third">3</li>
+    </ol>
+</div>
+
+<script>
+    const newElem = document.createElement('li');
+    newElem.className = 'new-li';
+    newElem.id = 'new-li-id';
+    newElem.textContent = "new child";
+
+    const liElemFirst = document.getElementsByClassName('first');
+    const divElem = document.getElementById('ol-id');
+
+    divElem.insertBefore(newElem, divElem.childNodes[2]);
+</script> -->
+
+        <div>
+            <h1>리스트 시작</h1>
+            <ol id="ol-id">
+                <li class="first">1</li>
+                <li class="second">2</li>
+                <li class="third">3</li>
+            </ol>
+        </div>
+
+        <script>
+            const newElem1 = document.createElement("li");
+            newElem1.textContent = "new child1";
+
+            const newElem2 = document.createElement("li");
+            newElem2.textContent = "new child2";
+
+            const newElem3 = document.createElement("li");
+            newElem3.textContent = "new child3";
+
+            const newElem4 = document.createElement("li");
+            newElem4.textContent = "new child4";
+
+            const olElem = document.getElementById("ol-id");
+            olElem.prepend(newElem1);
+            olElem.append(newElem2);
+
+            const firstLi = document.querySelector("#ol-id> .first");
+            firstLi.after(newElem3);
+            firstLi.before(newElem4);
+        </script>
+
+        <!-- <div id="div-id">
+    DIV 요소
+</div>
+<button onclick="removeDiv();" id="button-id"> 클릭</button>
+<script>
+    function removeDiv(){
+        const divElem = document.getElementById('div-id');
+        divElem.parentNode.removeChild(divElem);
+    }
+</script> -->
+
+        <div id="div-id">DIV 요소</div>
+        <button onclick="removeDiv()" id="button-id">클릭</button>
+        <script>
+            function removeDiv() {
+                const divElem = document.getElementById("div-id");
+                divElem.remove(divElem);
+            }
+        </script>
+
+        <!-- <div id="div-id">Div 요소</div>
+<button onclick="addDiv()" id="button-id">클릭</button>
+<script>
+    function addDiv(){
+        const divElem = document.getElementById('div-id');
+        divElem.insertAdjacentHTML('beforebegin','<span>Hello</span>');
+        
+    }
+</script> -->
+        <!-- 
+<ul id="list">
+    <li id="1">list 1</li>
+    <li id="2">list 2</li>
+    <li id="3">list 3</li>
+</ul>
+<script>
+    const list = document.getElementById('list');
+    list.addEventListener('click', function(event) {
+        console.log(event.target.id);
+        console.log(event.currentTarget.id);
+    })
+</script> -->
+
+        <div
+            id="box"
+            style="width: 200px; height: 200px; background-color: yellow"
+        ></div>
+        <div id="result" class="result"></div>
+        <button id="buttonclear" onclick="removediv()">clear</button>
+
+        <script>
+            const box = document.getElementById("box");
+            const result = document.getElementById("result");
+            box.addEventListener("click", function (event) {
+                console.log(event);
+                result.innerHTML += `<div id="div-inner"> ${event.type} </div>`;
+            });
+            box.addEventListener("mousedown", function (event) {
+                console.log(event);
+                result.innerHTML += `<div id="div-inner"> ${event.type} </div>`;
+            });
+            box.addEventListener("mouseup", function (event) {
+                console.log(event);
+                result.innerHTML += `<div id="div-inner"> ${event.type} </div>`;
+            });
+            box.addEventListener("dblclick", function (event) {
+                console.log(event);
+                result.innerHTML += `<div id="div-inner"> ${event.type} </div>`;
+            });
+
+            const button = document.getElementById("buttonclear");
+            function removediv() {
+                result.innerHTML = "";
+            }
+        </script>
+
+        <div>
+            <input class="keyboardInput" id="keyboardInput" />
+            <button id="keyboardClear" onclick="keyboardInputClear()">
+                clear
+            </button>
+            <div id="keyboardResult"></div>
+        </div>
+        <script>
+            const keyboardInputResult =
+                document.getElementById("keyboardResult");
+            const keyboardInput = document.getElementById("keyboardInput");
+            const keyboardClear = document.getElementById("keyboardClear");
+
+            keyboardInput.addEventListener("keydown", function (event) {
+                setTimeout(() => {
+                    keyboardInputResult.innerHTML += `<div id="div-inner"> ${event.type} </div>`;
+                }, 50);
+            });
+            keyboardInput.addEventListener("keyup", function (event) {
+                setTimeout(() => {
+                    keyboardInputResult.innerHTML += `<div id="div-inner"> ${event.type} </div>`;
+                }, 50);
+            });
+            function keyboardInputClear() {
+                keyboardInputResult.innerHTML = "";
+            }
+        </script>
+    </body>
+</html>

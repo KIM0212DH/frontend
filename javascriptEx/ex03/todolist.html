@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <input id="input-box" onkeyup="enterKey()" />
+
+        <button id="input-button" onclick="insertList()">추가</button>
+
+        <ul id="todolist"></ul>
+        <button id="clear-all" onclick="clearAll()">모두 삭제</button>
+        <script>
+            const todolist = document.getElementById("todolist");
+            // const inputButton = document.getElementById("input-box");
+
+            const localLen = localStorage.length; // 기존에 존재하는 로컬 스토리지만큼 반복
+            for (var i = 0; i < localLen; i++) {
+                // 기존에 존재하는 로컬 스토리지를 기반으로 리스트 작성
+                todolist.innerHTML += `<li id='${localStorage.getItem(
+                    localStorage.key(i)
+                )}'> ${localStorage.getItem(
+                    localStorage.key(i)
+                )} <button id="delete-${localStorage.getItem(
+                    localStorage.key(i)
+                )}" onclick="deleteList('${localStorage.getItem(
+                    localStorage.key(i)
+                )}')">삭제</button> </li>`;
+            }
+
+            function enterKey() {
+                if (window.event.keyCode == 13) {
+                    insertList();
+                }
+            }
+            function insertList() {
+                const inputBox = document.getElementById("input-box").value;
+                if (inputBox == "") {
+                    return;
+                }
+
+                todolist.innerHTML += `<li id='${inputBox}'> ${inputBox} <button id="delete-${inputBox}" onclick="deleteList('${inputBox}')">삭제</button> </li>`;
+
+                localStorage.setItem(`todo ${inputBox}`, inputBox);
+                document.getElementById("input-box").value = "";
+            }
+            function deleteList(id) {
+                const todelete = document.getElementById(id);
+                todelete.remove();
+                localStorage.removeItem("todo " + id);
+            }
+            function clearAll() {
+                todolist.innerHTML = "";
+                localStorage.clear();
+            }
+        </script>
+    </body>
+</html>
