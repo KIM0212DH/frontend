@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Navigation</title>
+<link rel="stylesheet" href="final.css">
+</head>
+<body>
+
+<header class="main-header">
+    <div class="logo-container">
+        <a href="final.html" class="logo-link">
+            <img src="" alt="로고 이미지" class="logo-image">
+            <span class="logo-text">로고 텍스트</span>
+        </a>
+    </div>
+    <nav class="main-nav">
+        <div class="menu-icon" id="menu-icon">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="menu" id="menu">
+            <li><a href="#" class="menu-item">추천메뉴</a></li>
+            <li><a href="#" class="menu-item">마실것</a>
+                <ul class="submenu">
+                    <li><a href="#">아메리카노</a></li>
+                    <li><a href="#">카페라떼</a></li>
+                    <li><a href="#">드립커피</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="menu-item">먹을것</a>
+                <ul class="submenu">
+                    <li><a href="#">치즈케익</a></li>
+                    <li><a href="#">마카롱</a></li>
+                    <li><a href="#">티라미슈</a></li>
+                </ul></li>
+            <li><a href="#" class="menu-item">주문하기</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <body>
+        
+    </body>
+
+    <footer>asd</footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    var menuItems = document.querySelectorAll('.menu-item');
+
+    menuItems.forEach(function(item) {
+        item.addEventListener('click', function(event) {
+            var submenu = this.nextElementSibling; // 해당 항목의 다음 요소인 서브메뉴를 찾음
+            if (submenu && submenu.classList.contains('submenu')) {
+                event.preventDefault(); // 기본 동작 방지
+                submenu.classList.toggle('active'); // 서브메뉴 토글
+            }
+        });
+    });
+});
+
+    </script>
+    <!-- Your content goes here -->
+</main>
+
+</body>
+</html>

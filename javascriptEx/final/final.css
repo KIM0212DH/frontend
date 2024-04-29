@@ -1,0 +1,134 @@
+/* main-header 스타일 */
+.main-header {
+    background-color: #e9d8d8;
+    padding: 20px;
+    display: flex; /* Flexbox 사용 */
+    justify-content: space-between; /* 로고와 메뉴를 좌우로 정렬 */
+    align-items: center; /* 로고와 메뉴를 수직으로 중앙 정렬 */
+}
+
+/* main-nav 스타일 */
+.main-nav {
+    text-align: center;
+}
+
+/* menu 스타일 */
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Flexbox 사용 */
+}
+
+/* menu-item 스타일 */
+.menu-item {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px; /* 메뉴 간 간격 추가 */
+    position: relative; /* 상대 위치 */
+}
+
+/* 로고 이미지 스타일 */
+.logo-image {
+    width: 50px; /* 로고 이미지 너비 */
+    height: auto; /* 로고 이미지 높이 자동 조정 */
+    margin-right: 10px; /* 로고 이미지 오른쪽 여백 */
+}
+
+/* 로고 텍스트 스타일 */
+.logo-text {
+    font-size: 1.2rem; /* 로고 텍스트 글꼴 크기 */
+}
+
+/* 로고 텍스트와 이미지에 호버 스타일 추가 */
+.logo-link:hover .logo-image,
+.logo-link:hover .logo-text {
+    opacity: 0.8; /* 호버 시 투명도 조정 */
+}
+
+/* 메뉴 아이콘 스타일 */
+.menu-icon {
+    display: none; /* 기본적으로 숨김 */
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+}
+
+/* 서브메뉴 스타일 */
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    padding: 10px;
+    left: 0;
+    top: 100%;
+}
+
+.submenu li {
+    margin: 5px 0;
+}
+
+/* 760px 이하 화면 크기에 대한 스타일 */
+@media only screen and (max-width: 760px) {
+    .menu {
+        flex-direction: column; /* 세로로 아이템 배치 */
+        align-items: center; /* 아이템을 가운데 정렬 */
+        display: none; /* 기본적으로 숨김 */
+    }
+
+    .menu-item {
+        margin: 10px 0; /* 각각의 아이템 사이 간격 추가 */
+    }
+
+    /* 화면이 작을 때 메뉴 아이콘 보이기 */
+    #menu-icon {
+        display: block;
+    }
+
+    /* 메뉴 아이콘 클릭 시 메뉴 보이기 */
+    #menu-icon.clicked ~ #menu {
+        display: flex;
+    }
+    
+    /* 메뉴 아이템 클릭 시 서브메뉴 보이기 */
+    .menu-item.clicked .submenu {
+        display: block;
+    }
+}
+
+.submenu {
+    display: none;
+    position: absolute; /* 절대 위치 지정 */
+    top: 100%; /* 메뉴 아래에 위치 */
+    left: 0;
+    background-color: #fff; /* 배경색 지정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    padding: 10px;
+}
+
+.submenu.active {
+    display: block; /* 활성화된 서브메뉴는 표시 */
+}
+
+.menu-item {
+    position: relative; /* 부모 요소로부터의 상대 위치 */
+}
+
+.submenu {
+    display: none;
+    position: absolute; /* 절대 위치 지정 */
+    top: 100%; /* 메뉴 아래에 위치 */
+    left: 0; /* 부모 요소로부터 왼쪽 정렬 */
+    background-color: #fff; /* 배경색 지정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    padding: 10px;
+}
+
+.menu-item:hover .submenu {
+    display: block; /* 메뉴 호버 시 서브메뉴 표시 */
+}

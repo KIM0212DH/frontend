@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Responsive Web</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            header {
+                background-color: #333;
+                color: white;
+                padding: 10px;
+                text-align: center;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            header h1 {
+                margin: 0;
+            }
+            nav {
+                background-color: #666;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding: 10px 0;
+            }
+            nav a {
+                color: white;
+                text-decoration: none;
+                transition: background-color 0.3s;
+                padding: 10px 20px;
+            }
+            nav a:hover {
+                background-color: #444;
+            }
+            .dropdown {
+                position: relative;
+            }
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                z-index: 1;
+            }
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+            .show {
+                display: block !important;
+            }
+            .container {
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            footer {
+                background-color: #333;
+                color: white;
+                text-align: center;
+                padding: 10px;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="brand">
+                <img src="logo.png" alt="Brand Logo" width="100" />
+                <h1>Brand Name</h1>
+            </div>
+            <nav>
+                <a href="#" onclick="toggleDropdown('recommendation')"
+                    >추천메뉴</a
+                >
+                <a href="#" onclick="toggleDropdown('drink')">마실것</a>
+                <a href="#" onclick="toggleDropdown('eat')">먹을것</a>
+                <div class="dropdown" id="order">
+                    <a href="#">주문하기</a>
+                    <div class="dropdown-content">
+                        <a href="#">카페라떼</a>
+                        <a href="#">아메리카노</a>
+                        <a href="#">카푸치노</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container">
+            <!-- Content goes here -->
+            <p>This is the main content area.</p>
+        </div>
+
+        <footer>
+            <div class="container">
+                &copy; 2024 Brand Name. All rights reserved.
+            </div>
+        </footer>
+
+        <script>
+            // 드롭다운 메뉴 토글 함수
+            function toggleDropdown(menuId) {
+                const dropdownContent = document
+                    .getElementById(menuId)
+                    .querySelector(".dropdown-content");
+                dropdownContent.classList.toggle("show");
+
+                // 다른 메뉴의 드롭다운 메뉴를 숨김
+                document.querySelectorAll(".dropdown").forEach((item) => {
+                    if (item.id !== menuId) {
+                        item.querySelector(
+                            ".dropdown-content"
+                        ).classList.remove("show");
+                    }
+                });
+            }
+
+            // 상세 메뉴 클릭 시 확인 창 띄우기
+            document.querySelectorAll(".dropdown-content a").forEach((item) => {
+                item.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    const menuName = item.textContent;
+                    if (confirm(`주문하시겠습니까? - ${menuName}`)) {
+                        // 여기에 주문 처리 로직 추가
+                        alert(`${menuName} 주문이 완료되었습니다.`);
+                    }
+                });
+            });
+
+            // 다른 곳을 클릭하면 드롭다운 메뉴가 닫히도록 처리
+            window.addEventListener("click", (event) => {
+                document
+                    .querySelectorAll(".dropdown-content")
+                    .forEach((dropdown) => {
+                        dropdown.classList.remove("show");
+                    });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ordering</title>
+
+    <style>
+        .flex{
+            display: flex;
+        }
+        .ic {
+            align-items: center;
+        }
+        .jc{
+            justify-content: center;
+        }
+        .je{
+            justify-content: flex-end;
+        }
+        .li-no-dot{
+            list-style-type: none;
+        }
+        .li-inline{
+            display: inline-block;
+        }
+         /* Add this CSS */
+    @media screen and (max-width: 760px) {
+        .li-no-dot {
+            display: none;
+        }
+
+        #menu-list.show-menu {
+            display: block;
+        }
+    }
+    </style>
+</head>
+
+
+<body>
+    <header>
+        <nav>
+            <div class="flex ic jc">
+                <a href="my.html">
+                    <img src="" alt="brand logo">
+                </a>
+                <a href="my.html">brand name</a>
+                <div class="menu-toggle" id="menu-toggle">
+                    <img src="menu_icon.png" alt="menu">
+                </div>
+                <ul class="li-no-dot li-inline flex ic je" id="menu-list">
+                    <li class="li-inline">
+                        <button id="recommendation-btn">추천 메뉴</button>
+                    </li>
+                    <li class="li-inline">
+                        <button id="drink-btn">마실거</button>
+                    </li>
+                    <li class="li-inline">
+                        <button id="eat-btn">먹을거</button>
+                    </li>
+                    <li class="li-inline">
+                        <button id="order-history-btn">주문내역</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Your content goes here -->
+</body>
+
+</html>
