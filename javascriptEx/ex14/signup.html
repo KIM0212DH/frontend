@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        
+        <audio id="bgm" autoplay controls>
+            <source src="Steven Beddall - Escape Velocity.mp3" type="audio/mp3">
+        </audio>
+        <h1>회원가입 합니다.</h1>
+        <section style="background-color: antiquewhite; width: 40%; padding: 10px;">
+            <form
+                action="https://2140530f-219b-4db4-86c1-5bf4a166907c.mock.pstmn.io/signup"
+                method="post"
+                formenctype="text/plain"
+            >
+                아이디 <br />
+                <input type="text" name="id" id="id" /> <br />
+                비밀번호 <br />
+                <input type="password" name="pw1" id="pw" /> <br />
+                비밀번호 재확인 <br />
+                <input type="password" name="pw2" id="pw" /> <br />
+                이름 <br />
+                <input type="text" name="name" id="name" /><br />
+                생년월일<br />
+                <input type="date" name="date" id="date" /><br />
+                성별<br />
+                <select name="gender" id="gender">
+                    <option value="남">남</option>
+                    <option value="여">여</option>
+                </select>
+                <br>
+                휴대전화<br>
+                <input type="text" placeholder="전화번호 입력" name="phonenum" id="phonenum">
+                <br>
+                <button type="submit">가입하기</button>
+            </form>
+        </section>
+    </body>
+    <script>
+        // 페이지 로드 시 자동으로 음악 재생
+        window.addEventListener('load', function() {
+            document.getElementById('bgm').play();
+        });
+        </script>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <audio id="bgm" autoplay controls>
+            <source src="Steven Beddall - Escape Velocity.mp3" type="audio/mp3">
+        </audio>
+        <form
+            action="https://2140530f-219b-4db4-86c1-5bf4a166907c.mock.pstmn.io/login"
+            method="post"
+            formenctype="application/x-www-form-urlencoded"
+        >
+            아이디 : <input type="text" name="id" id="id" />
+            <br />
+            비밀번호 : <input type="password" name="pw" id="pw" />
+            <button type="submit">로그인</button>
+        </form>
+        <script>
+            // 페이지 로드 시 자동으로 음악 재생
+            window.addEventListener('load', function() {
+                document.getElementById('bgm').play();
+            });
+            </script>
+            <a href="signup.html">bbb</a>
+    </body>
+</html>

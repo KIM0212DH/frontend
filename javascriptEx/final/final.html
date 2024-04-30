@@ -1,70 +1,211 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Responsive Navigation</title>
-<link rel="stylesheet" href="final.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카페 메뉴</title>
+    <style>
+        /* styles.css */
+
+/* 공통 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+.brand img {
+    width: 50px;
+    height: auto;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.navbar_menu {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar_menu li {
+    margin-right: 20px;
+    position: relative;
+}
+
+.navbar_menu li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.navbar_menu li:hover .submenu {
+    display: block;
+}
+
+.navbar_icons {
+    display: none;
+}
+
+/* 반응형 스타일 */
+@media screen and (max-width: 770px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar_menu {
+        display: none;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .navbar_icons {
+        display: block;
+    }
+
+    .navbar_menu.active {
+        display: flex;
+    }
+
+    .navbar_menu.active .submenu {
+        display: none;
+    }
+
+    .navbar_togleBtn {
+        width: 30px;
+        height: 30px;
+        background-color: #333;
+    }
+
+    .navbar_icons.active .navbar_menu {
+        display: flex;
+    }
+}
+
+    </style>
 </head>
 <body>
-
-<header class="main-header">
-    <div class="logo-container">
-        <a href="final.html" class="logo-link">
-            <img src="" alt="로고 이미지" class="logo-image">
-            <span class="logo-text">로고 텍스트</span>
-        </a>
-    </div>
-    <nav class="main-nav">
-        <div class="menu-icon" id="menu-icon">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+    <header>
+        <div class="brand">
+            <img src="brand_logo.png" alt="브랜드 로고">
+            <span class="brand_name">카페 이름</span>
         </div>
-        <ul class="menu" id="menu">
-            <li><a href="#" class="menu-item">추천메뉴</a></li>
-            <li><a href="#" class="menu-item">마실것</a>
-                <ul class="submenu">
-                    <li><a href="#">아메리카노</a></li>
-                    <li><a href="#">카페라떼</a></li>
-                    <li><a href="#">드립커피</a></li>
-                </ul>
-            </li>
-            <li><a href="#" class="menu-item">먹을것</a>
-                <ul class="submenu">
-                    <li><a href="#">치즈케익</a></li>
-                    <li><a href="#">마카롱</a></li>
-                    <li><a href="#">티라미슈</a></li>
-                </ul></li>
-            <li><a href="#" class="menu-item">주문하기</a></li>
-        </ul>
-    </nav>
-</header>
+        <nav class="navbar">
+            <ul class="navbar_menu">
+                <li><a href="#" class="recommendation">추천메뉴</a>
+                    <ul class="submenu">
+                        <li><a href="#">마카롱</a></li>
+                        <li><a href="#">빵</a></li>
+                        <li><a href="#">카페라떼</a></li>
+                        <li><a href="#">아메리카노</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="drink">마실것</a>
+                    <ul class="submenu">
+                        <li><a href="#">아메리카노</a></li>
+                        <li><a href="#">카페라떼</a></li>
+                        <li><a href="#">드립커피</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="eat">먹을것</a>
+                    <ul class="submenu">
+                        <li><a href="#">빵</a></li>
+                        <li><a href="#">마카롱</a></li>
+                        <li><a href="#">치즈케익</a></li>
+                        <li><a href="#">티라미슈</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="order_history">주문내역</a></li>
+            </ul>
+            <div class="navbar_icons">
+                <div class="navbar_togleBtn"></div>
+            </div>
+        </nav>
+    </header>
 
-<main>
-    <body>
-        
-    </body>
+    <main>
+        <!-- 메뉴 컨텐츠 영역 -->
+    </main>
 
-    <footer>asd</footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    var menuItems = document.querySelectorAll('.menu-item');
+        // script.js
 
-    menuItems.forEach(function(item) {
-        item.addEventListener('click', function(event) {
-            var submenu = this.nextElementSibling; // 해당 항목의 다음 요소인 서브메뉴를 찾음
-            if (submenu && submenu.classList.contains('submenu')) {
-                event.preventDefault(); // 기본 동작 방지
-                submenu.classList.toggle('active'); // 서브메뉴 토글
+document.addEventListener("DOMContentLoaded", function() {
+    // 메뉴 클릭 이벤트 처리
+    const menuItems = document.querySelectorAll('.navbar_menu > li');
+    menuItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const submenu = this.querySelector('.submenu');
+            submenu.classList.toggle('active');
+        });
+    });
+
+    // 햄버거 아이콘 클릭 시 메뉴 보이기/숨기기
+    const toggleBtn = document.querySelector('.navbar_togleBtn');
+    const navbarMenu = document.querySelector('.navbar_menu');
+    toggleBtn.addEventListener('click', function() {
+        navbarMenu.classList.toggle('active');
+    });
+
+    // 주문내역 클릭 시 세션 스토리지 확인 후 화면 전환
+    const orderHistoryLink = document.querySelector('.order_history');
+    orderHistoryLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        const orderHistory = JSON.parse(sessionStorage.getItem('orderHistory'));
+        if (orderHistory && orderHistory.length > 0) {
+            // 주문내역이 있을 경우 처리
+            // 예시로 alert을 통해 주문내역을 보여줍니다.
+            alert('주문내역: ' + orderHistory.join(', '));
+        } else {
+            // 주문내역이 없을 경우 처리
+            alert('주문내역이 없습니다.');
+        }
+    });
+
+    // 주문하기 버튼 클릭 시 주문내역 초기화
+    const orderButton = document.querySelector('.order_button');
+    orderButton.addEventListener('click', function() {
+        sessionStorage.removeItem('orderHistory');
+        alert('주문이 완료되었습니다.');
+    });
+
+    // 상세 메뉴 클릭 시 주문내역에 추가
+    const subMenuItems = document.querySelectorAll('.submenu a');
+    subMenuItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const menuItem = this.textContent;
+            const orderHistory = JSON.parse(sessionStorage.getItem('orderHistory')) || [];
+            orderHistory.push(menuItem);
+            sessionStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+            const confirmOrder = confirm(menuItem + '을(를) 주문하시겠습니까?');
+            if (confirmOrder) {
+                alert('주문이 확인되었습니다.');
             }
         });
     });
 });
 
     </script>
-    <!-- Your content goes here -->
-</main>
-
 </body>
 </html>

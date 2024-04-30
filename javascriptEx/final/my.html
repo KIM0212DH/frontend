@@ -1,72 +1,162 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ordering</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Responsive Navigation</title>
+        <link rel="stylesheet" href="final.css" />
+        <style>
+            /* main-header 스타일 */
+            .main-header {
+                background-color: #e9d8d8;
+                padding: 20px;
+                display: flex; /* Flexbox 사용 */
+                justify-content: space-between; /* 로고와 메뉴를 좌우로 정렬 */
+                align-items: center; /* 로고와 메뉴를 수직으로 중앙 정렬 */
+            }
 
-    <style>
-        .flex{
-            display: flex;
-        }
-        .ic {
-            align-items: center;
-        }
-        .jc{
-            justify-content: center;
-        }
-        .je{
-            justify-content: flex-end;
-        }
-        .li-no-dot{
-            list-style-type: none;
-        }
-        .li-inline{
-            display: inline-block;
-        }
-         /* Add this CSS */
-    @media screen and (max-width: 760px) {
-        .li-no-dot {
-            display: none;
-        }
+            /* main-nav 스타일 */
+            .main-nav {
+                display: flex;
+            }
 
-        #menu-list.show-menu {
-            display: block;
-        }
-    }
-    </style>
-</head>
+            /* menu 스타일 */
+            .menu {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                display: flex; /* Flexbox 사용 */
+                position: relative;
+            }
 
+            /* menu-item 스타일 */
+            .menu-item {
+                margin-left: 20px; /* 메뉴 간 간격 추가 */
+                position: relative;
+            }
 
-<body>
-    <header>
-        <nav>
-            <div class="flex ic jc">
-                <a href="my.html">
-                    <img src="" alt="brand logo">
+            /* 로고 이미지 스타일 */
+            .logo-image {
+                width: 50px; /* 로고 이미지 너비 */
+                height: auto; /* 로고 이미지 높이 자동 조정 */
+                margin-right: 10px; /* 로고 이미지 오른쪽 여백 */
+            }
+
+            /* 로고 텍스트 스타일 */
+            .logo-text {
+                font-size: 1.2rem; /* 로고 텍스트 글꼴 크기 */
+            }
+
+            /* 메뉴 아이콘 스타일 */
+            .menu-icon {
+                display: none; /* 기본적으로 숨김 */
+            }
+
+            /* 서브메뉴 스타일 */
+            .submenu {
+                list-style-type: none;
+                display: none;
+                position: absolute;
+                background-color: #fff;
+                padding: 10px;
+                border: 1px solid #ccc;
+            }
+
+            /* 760px 이하 화면 크기에 대한 스타일 */
+            @media only screen and (max-width: 760px) {
+                .menu {
+                    display: none; /* 기본적으로 숨김 */
+                }
+
+                .menu-icon {
+                    display: block;
+                }
+
+                .menu.active {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="logo-container">
+                <a href="my.html" class="logo-link">
+                    <img src="logo.png" alt="로고 이미지" class="logo-image" />
+                    <span class="logo-text">로고 텍스트</span>
                 </a>
-                <a href="my.html">brand name</a>
-                <div class="menu-toggle" id="menu-toggle">
-                    <img src="menu_icon.png" alt="menu">
+            </div>
+            <nav class="main-nav">
+                <div class="menu-icon" id="menu-icon">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
                 </div>
-                <ul class="li-no-dot li-inline flex ic je" id="menu-list">
-                    <li class="li-inline">
-                        <button id="recommendation-btn">추천 메뉴</button>
+                <ul class="menu" id="menu">
+                    <li>
+                        <a href="#" class="menu-item">추천메뉴</a>
+                        <ul class="submenu">
+                            <li><a href="#">마카롱</a></li>
+                            <li><a href="#">빵</a></li>
+                            <li><a href="#">카페라떼</a></li>
+                            <li><a href="#">아메리카노</a></li>
+                        </ul>
                     </li>
-                    <li class="li-inline">
-                        <button id="drink-btn">마실거</button>
+                    <li>
+                        <a href="#" class="menu-item">마실것</a>
+                        <ul class="submenu">
+                            <li><a href="#">아메리카노</a></li>
+                            <li><a href="#">카페라떼</a></li>
+                            <li><a href="#">드립커피</a></li>
+                        </ul>
                     </li>
-                    <li class="li-inline">
-                        <button id="eat-btn">먹을거</button>
+                    <li>
+                        <a href="#" class="menu-item">먹을것</a>
+                        <ul class="submenu">
+                            <li><a href="#">빵</a></li>
+                            <li><a href="#">마카롱</a></li>
+                            <li><a href="#">치즈케익</a></li>
+                            <li><a href="#">티라미슈</a></li>
+                        </ul>
                     </li>
-                    <li class="li-inline">
-                        <button id="order-history-btn">주문내역</button>
+                    <li>
+                        <a href="order_list.html" class="menu-item">주문내역</a>
                     </li>
                 </ul>
-            </div>
-        </nav>
-    </header>
-    <!-- Your content goes here -->
-</body>
+            </nav>
+        </header>
 
+        <main>
+            <!-- 내용 추가 -->
+        </main>
+
+        <script>
+            // JavaScript 코드 추가
+            document.addEventListener("DOMContentLoaded", function () {
+                // 메뉴 아이콘 클릭 시 메뉴 보이기/숨기기
+                var menuIcon = document.getElementById("menu-icon");
+                var menu = document.getElementById("menu");
+                menuIcon.addEventListener("click", function () {
+                    menu.classList.toggle("active");
+                });
+
+                // 각 메뉴 클릭 시 서브메뉴 보이기/숨기기
+                var menuItems = document.querySelectorAll(".menu-item");
+                menuItems.forEach(function (menuItem) {
+                    menuItem.addEventListener("click", function () {
+                        var submenu = this.nextElementSibling;
+                        submenu.classList.toggle("active");
+                    });
+                });
+
+                // 주문하기 버튼 클릭 시 주문내역 초기화
+                var orderButton = document.querySelector(".order-button");
+                orderButton.addEventListener("click", function () {
+                    sessionStorage.removeItem("orders");
+                    alert("주문이 초기화되었습니다.");
+                });
+            });
+        </script>
+    </body>
 </html>
