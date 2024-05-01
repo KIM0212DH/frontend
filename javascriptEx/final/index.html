@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Responsive Navigation</title>
+        <link rel="stylesheet" href="final.css" />
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="" alt="로고 이미지" class="logo-image" />
+                    <p class="logo-text">로고 텍스트</p>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <div class="menu-icon" id="menu-icon">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <ul class="menu" id="menu">
+                    <li>
+                        <a href="#" class="menu-item">추천메뉴</a>
+                        <ul class="submenu recommend-submenu">
+                            <li><a id="remenu1" href="#">아메리카노</a></li>
+                            <li><a id="remenu2" href="#">티라미슈</a></li>
+                            <li><a id="remenu3" href="#">드립커피</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#" class="menu-item">마실것</a>
+                        <ul class="submenu drink-submenu">
+                            <li><a id="drmenu1" href="#">아메리카노</a></li>
+                            <li><a id="drmenu2" href="#">카페라떼</a></li>
+                            <li><a id="drmenu3" href="#">드립커피</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item">먹을것</a>
+                        <ul class="submenu eat-submenu">
+                            <li><a id="eatmenu1" href="#">치즈케익</a></li>
+                            <li><a id="eatmenu2" href="#">마카롱</a></li>
+                            <li><a id="eatmenu3" href="#">티라미슈</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="order_list.html" class="menu-item">주문내역</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <body>
+                <h2 class="order_list_container"></h2>
+                <div
+                    id="order_list_container"
+                    class="order_list_container"
+                ></div>
+                <div id="button_container" class="button_container"></div>
+            </body>
+
+            <script>
+                var buttonExist = false;
+                var sessionLen = sessionStorage.length;
+                const orderListContainer = document.getElementById(
+                    "order_list_container"
+                );
+                const buttonContainer =
+                    document.getElementById("button_container");
+                
+
+                function extraOrdering(subMenuName, count) {
+                    sessionLen = sessionStorage.length;
+                    orderListContainer.innerHTML = "";
+                    for (var i = 0; i < sessionLen; i++) {
+                        var itemKey = sessionStorage.key(i);
+                        if (itemKey == "IsThisFirstTime_Log_From_LiveServer") {
+                            continue;
+                        }
+                        var itemValue = sessionStorage.getItem(itemKey);
+                        console.log(itemKey, itemValue);
+                        
+                    }
+                    
+                }
+
+                function orderDone() {
+                    
+                    sessionStorage.clear();
+                    buttonExist = false;
+                }
+
+                document.addEventListener("DOMContentLoaded", function () {
+                    // submenu 클래스 하위의 모든 앵커 태그를 선택합니다.
+                    var submenuLinks = document.querySelectorAll(".submenu a");
+                    // 선택한 모든 앵커 태그에 대해 이벤트 리스너를 추가합니다.
+                    submenuLinks.forEach(function (link) {
+                        link.addEventListener("click", function (event) {
+                            // 여기에 원하는 동작을 추가합니다.
+                            var subMenuName = link.textContent;
+                            var confirmation = confirm(
+                                subMenuName + "를 주문하시겠습니까?"
+                            );
+                            if (confirmation) {
+                                // 사용자가 확인을 클릭한 경우
+                                var count = sessionStorage.getItem(subMenuName); // 세션 스토리지에서 해당 서브메뉴의 횟수 가져오기
+
+                                if (count) {
+                                    // 해당 서브메뉴가 이미 세션 스토리지에 존재하는 경우
+                                    count = parseInt(count) + 1; // 횟수 증가
+                                } else {
+                                    // 해당 서브메뉴가 세션 스토리지에 존재하지 않는 경우
+                                    count = 1; // 횟수 초기화
+                                }
+                                sessionStorage.setItem(subMenuName, count); // 세션 스토리지에 주문 횟수 저장
+                                // 실시간 추가
+                                extraOrdering();
+                            }
+
+                            // 서브메뉴가 활성화되지 않도록 합니다.
+                            var submenu = link.closest(".submenu");
+                            submenu.classList.remove("active");
+                        });
+                    });
+                });
+
+                document.addEventListener("DOMContentLoaded", function () {
+                    var menuItemsWithSubmenu = document.querySelectorAll(
+                        ".menu-item + .submenu"
+                    );
+
+                    menuItemsWithSubmenu.forEach(function (submenu) {
+                        var menuItem = submenu.previousElementSibling; // 메뉴 아이템 선택
+
+                        menuItem.addEventListener("click", function (event) {
+                            console.log(submenu);
+                            console.log(menuItem);
+                            event.preventDefault();
+
+                            submenu.classList.toggle("active"); // 서브메뉴 토글
+                            
+                        });
+                    });
+                });
+                
+
+
+
+                const menuIcon = document.querySelector(".menu-icon");
+                const menu = document.querySelector(".menu");
+                console.log(menuIcon);
+                menuIcon.addEventListener("click", () => {
+                    menu.classList.toggle("active");
+                });
+
+            
+
+              
+            </script>
+
+            <!-- Your content goes here -->
+        </main>
+    </body>
+</html>
