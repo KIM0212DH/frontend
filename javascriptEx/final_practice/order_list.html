@@ -162,6 +162,14 @@
                     buttonExist = true;
                 }
             }
+
+            var hamburger = document.getElementById("menu-icon");
+            hamburger.addEventListener("click", function(event){
+                
+                var menu = document.getElementById("menu");
+                console.log(menu);
+                menu.classList.toggle("active");
+            })
         </script>
     </body>
 </html>
