@@ -54,133 +54,132 @@
         </header>
 
         <main>
-            <body>
+            <section>
                 <h2 class="order_list_container">주문 내역</h2>
                 <div
                     id="order_list_container"
                     class="order_list_container"
                 ></div>
                 <div id="button_container" class="button_container"></div>
-            </body>
+            </section>
 
+            <script></script>
             <script>
                 var buttonExist = false;
-                var sessionLen = sessionStorage.length;
-                const orderListContainer = document.getElementById(
-                    "order_list_container"
-                );  
-                const buttonContainer =
-                    document.getElementById("button_container");
-                if (sessionLen > 0) {
-                    //웹페이지 처음 입장 시 세션 스토리지 탐색해서 화면에 보여줌
-                    var makeButtonFlag = false;
-                    for (var i = 0; i < sessionLen; i++) {  // 세션 스토리지를 돌면서 orderListContainer에 innerHTML로 주문 음식과 개수를 추가함
-                        var itemKey = sessionStorage.key(i);
-                        if (itemKey == "IsThisFirstTime_Log_From_LiveServer") { // 페이지가 로드되면 세션 스토리지에 해당 데이터가 저장되어 있어서 무시함
-                            continue;
-                        }
-                        makeButtonFlag = true;  // 버튼을 만들어야할 필요가 있어서 플래그 값 true로 설정
-                        var itemValue = sessionStorage.getItem(itemKey);    
-                        orderListContainer.innerHTML += `<div id="food-amount" class="food-amount"> 
+var sessionLen = sessionStorage.length;
+const orderListContainer = document.getElementById("order_list_container");
+const buttonContainer = document.getElementById("button_container");
+if (sessionLen > 0) {
+    //웹페이지 처음 입장 시 세션 스토리지 탐색해서 화면에 보여줌
+    var makeButtonFlag = false;
+    for (var i = 0; i < sessionLen; i++) {
+        // 세션 스토리지를 돌면서 orderListContainer에 innerHTML로 주문 음식과 개수를 추가함
+        var itemKey = sessionStorage.key(i);
+        if (itemKey == "IsThisFirstTime_Log_From_LiveServer") {
+            // 페이지가 로드되면 세션 스토리지에 해당 데이터가 저장되어 있어서 무시함
+            continue;
+        }
+        makeButtonFlag = true; // 버튼을 만들어야할 필요가 있어서 플래그 값 true로 설정
+        var itemValue = sessionStorage.getItem(itemKey);
+        orderListContainer.innerHTML += `<div id="food-amount" class="food-amount"> 
                         <div id="food">${itemKey}</div>
                         <div id="amount">${itemValue}개</div>
                         </div>`; // orderListContainer에 음식과 개수를 추가함
-                    }
-                    if (!buttonExist && makeButtonFlag) {
-                        // 웹페이지 처음 등장 시 장바구니에 있음. 주문하기 버튼 필요
-                        buttonContainer.innerHTML += `<button id="order" onclick=orderDone()>주문하기</button>`;
-                        buttonExist = true;
-                    } else {
-                        // 웹페이지 처음 등장 시 장바구니에 없음. 주문하기 버튼 필요 없음
-                        orderDone();
-                    }
-                }
+    }
+    if (!buttonExist && makeButtonFlag) {
+        // 웹페이지 처음 등장 시 장바구니에 있음. 주문하기 버튼 필요
+        buttonContainer.innerHTML += `<button id="order" onclick=orderDone()>주문하기</button>`;
+        buttonExist = true;
+    } else {
+        // 웹페이지 처음 등장 시 장바구니에 없음. 주문하기 버튼 필요 없음
+        orderDone();
+    }
+}
 
-                function extraOrdering(subMenuName, count) {
-                    sessionLen = sessionStorage.length;
-                    orderListContainer.innerHTML = "";
-                    for (var i = 0; i < sessionLen; i++) {
-                        var itemKey = sessionStorage.key(i);
-                        if (itemKey == "IsThisFirstTime_Log_From_LiveServer") {
-                            continue;
-                        }
-                        var itemValue = sessionStorage.getItem(itemKey);
-                        console.log(itemKey, itemValue);
-                        orderListContainer.innerHTML += `<div id="food-amount" class="food-amount">
+function extraOrdering(subMenuName, count) {
+    sessionLen = sessionStorage.length;
+    orderListContainer.innerHTML = "";
+    for (var i = 0; i < sessionLen; i++) {
+        var itemKey = sessionStorage.key(i);
+        if (itemKey == "IsThisFirstTime_Log_From_LiveServer") {
+            continue;
+        }
+        var itemValue = sessionStorage.getItem(itemKey);
+        console.log(itemKey, itemValue);
+        orderListContainer.innerHTML += `<div id="food-amount" class="food-amount">
                         <div id="food">${itemKey}</div>
                         <div id="amount">${itemValue}개</div>
                         </div>`;
-                    }
-                    if (!buttonExist) {
-                        buttonContainer.innerHTML += `<button id="order" onclick=orderDone()>주문하기</button>`;
-                        buttonExist = true;
-                    }
+    }
+    if (!buttonExist) {
+        buttonContainer.innerHTML += `<button id="order" onclick=orderDone()>주문하기</button>`;
+        buttonExist = true;
+    }
+}
+
+function orderDone() {
+    orderListContainer.innerHTML = "주문 내역이 없습니다.";
+    buttonContainer.innerHTML = "";
+    sessionStorage.clear();
+    buttonExist = false;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // submenu 클래스 하위의 모든 앵커 태그를 선택합니다.
+    var submenuLinks = document.querySelectorAll(".submenu a");
+    // 선택한 모든 앵커 태그에 대해 이벤트 리스너를 추가합니다.
+    submenuLinks.forEach(function (link) {
+        link.addEventListener("click", function (event) {
+            var subMenuName = link.textContent;
+            var confirmation = confirm(subMenuName + "를 주문하시겠습니까?");
+            if (confirmation) {
+                // 사용자가 확인을 클릭한 경우
+                var count = sessionStorage.getItem(subMenuName); // 세션 스토리지에서 해당 서브메뉴의 횟수 가져오기
+
+                if (count) {
+                    // 해당 서브메뉴가 이미 세션 스토리지에 존재하는 경우
+                    count = parseInt(count) + 1; // 횟수 증가
+                } else {
+                    // 해당 서브메뉴가 세션 스토리지에 존재하지 않는 경우
+                    count = 1; // 횟수 초기화
                 }
+                sessionStorage.setItem(subMenuName, count); // 세션 스토리지에 주문 횟수 저장
+                // 실시간 추가
+                extraOrdering();
+            }
 
-                function orderDone() {
-                    orderListContainer.innerHTML = "주문 내역이 없습니다.";
-                    buttonContainer.innerHTML = "";
-                    sessionStorage.clear();
-                    buttonExist = false;
-                }
+            // 서브메뉴가 활성화되지 않도록 합니다.
+            var submenu = link.closest(".submenu");
+            submenu.classList.remove("active");
+        });
+    });
+});
 
-                document.addEventListener("DOMContentLoaded", function () {
-                    // submenu 클래스 하위의 모든 앵커 태그를 선택합니다.
-                    var submenuLinks = document.querySelectorAll(".submenu a");
-                    // 선택한 모든 앵커 태그에 대해 이벤트 리스너를 추가합니다.
-                    submenuLinks.forEach(function (link) {
-                        link.addEventListener("click", function (event) {
-                            var subMenuName = link.textContent;
-                            var confirmation = confirm(
-                                subMenuName + "를 주문하시겠습니까?"
-                            );
-                            if (confirmation) {
-                                // 사용자가 확인을 클릭한 경우
-                                var count = sessionStorage.getItem(subMenuName); // 세션 스토리지에서 해당 서브메뉴의 횟수 가져오기
+document.addEventListener("DOMContentLoaded", function () {
+    var menuItemsWithSubmenu = document.querySelectorAll(
+        ".menu-item + .submenu"
+    );
 
-                                if (count) {
-                                    // 해당 서브메뉴가 이미 세션 스토리지에 존재하는 경우
-                                    count = parseInt(count) + 1; // 횟수 증가
-                                } else {
-                                    // 해당 서브메뉴가 세션 스토리지에 존재하지 않는 경우
-                                    count = 1; // 횟수 초기화
-                                }
-                                sessionStorage.setItem(subMenuName, count); // 세션 스토리지에 주문 횟수 저장
-                                // 실시간 추가
-                                extraOrdering();
-                            }
+    menuItemsWithSubmenu.forEach(function (submenu) {
+        var menuItem = submenu.previousElementSibling; // 메뉴 아이템 선택
 
-                            // 서브메뉴가 활성화되지 않도록 합니다.
-                            var submenu = link.closest(".submenu");
-                            submenu.classList.remove("active");
-                        });
-                    });
-                });
+        menuItem.addEventListener("click", function (event) {
+            console.log(submenu);
+            console.log(menuItem);
+            event.preventDefault();
 
-                document.addEventListener("DOMContentLoaded", function () {
-                    var menuItemsWithSubmenu = document.querySelectorAll(
-                        ".menu-item + .submenu"
-                    );
+            submenu.classList.toggle("active"); // 서브메뉴 토글
+        });
+    });
+});
 
-                    menuItemsWithSubmenu.forEach(function (submenu) {
-                        var menuItem = submenu.previousElementSibling; // 메뉴 아이템 선택
+const menuIcon = document.querySelector(".menu-icon");
+const menu = document.querySelector(".menu");
+console.log(menuIcon);
+menuIcon.addEventListener("click", () => {
+    menu.classList.toggle("active");
+});
 
-                        menuItem.addEventListener("click", function (event) {
-                            console.log(submenu);
-                            console.log(menuItem);
-                            event.preventDefault();
-
-                            submenu.classList.toggle("active"); // 서브메뉴 토글
-                        });
-                    });
-                });
-
-                const menuIcon = document.querySelector(".menu-icon");
-                const menu = document.querySelector(".menu");
-                console.log(menuIcon);
-                menuIcon.addEventListener("click", () => {
-                    menu.classList.toggle("active");
-                });
             </script>
 
             <!-- Your content goes here -->

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="" alt="로고 이미지" class="logo-image" />
+                    <p class="logo-text">브랜드 이름</p>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <div class="menu-icon" id="menu-icon">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <ul class="menu" id="menu">
+                    <li>
+                        <a href="" class="menu-item">추천메뉴</a>
+                        <ul class="submenu">
+                            <li><a href="" id="re1">아메리카노</a></li>
+                            <li><a href="" id="re2">카페라떼</a></li>
+                            <li><a href="" id="re3">모닝빵</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="" class="menu-item">마실거</a>
+                        <ul class="submenu">
+                            <li><a href="" id="dr1">아메리카노</a></li>
+                            <li><a href="" id="dr2">카페라떼</a></li>
+                            <li><a href="" id="dr3">녹차</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="" class="menu-item">먹을거</a>
+                        <ul class="submenu">
+                            <li><a href="" id="eat1">모닝빵</a></li>
+                            <li><a href="" id="eat2">마카롱</a></li>
+                            <li><a href="" id="eat3">식빵</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="order_list.html" class="menu-item">주문내역</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section></section>
+        </main>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var everysubmenulist = document.querySelectorAll(
+                    ".menu > li > .submenu"
+                );
+                everysubmenulist.forEach(function (submenu) {
+                    var submenuName = submenu.previousElementSibling;
+                    submenuName.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        submenu.classList.toggle("active");
+                    });
+                });
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                var everyfoodlist =
+                    document.querySelectorAll(".submenu > li > a");
+                everyfoodlist.forEach(function (food) {
+                    food.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        var foodName = food.textContent;
+                        var confirmation = confirm(
+                            foodName + "를 주문하시겠습니까?"
+                        );
+                        if (confirmation) {
+                            var count = sessionStorage.getItem(foodName);
+                            if (count) {
+                                count = parseInt(count) + 1;
+                            } else {
+                                count = 1;
+                            }
+                            sessionStorage.setItem(foodName, count);
+                        }
+                        var subMenu = food.closest(".submenu");
+                        subMenu.classList.remove("active");
+                    });
+                });
+            });
+
+            var hamburger = document.getElementById("menu-icon");
+            hamburger.addEventListener("click", function(event){
+                
+                var menu = document.getElementById("menu");
+                console.log(menu);
+                menu.classList.toggle("active");
+            })
+        </script>
+    </body>
+</html>

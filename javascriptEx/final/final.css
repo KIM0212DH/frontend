@@ -54,7 +54,6 @@
 
 /* menu-item 스타일 */
 .menu-item {
-    list-style-type: none;
     color: white;
     margin-left: 20px; /* 메뉴 간 간격 추가 */
     position: relative;
@@ -68,7 +67,6 @@
     display: none;
     position: absolute; /* 절대 위치 지정 */
     top: 100%; /* 메뉴 아래에 위치 */
-    left: 0;
     background-color: #fff; /* 배경색 지정 */
     border: 1px solid #ccc; /* 테두리 설정 */
     padding: 10px;
@@ -157,9 +155,6 @@
         top: 0;
         left: 0;
         right: 100%;
-
-
-
     }
 
     /* 메뉴 아이템 클릭 시 서브메뉴 보이기 */

@@ -54,14 +54,14 @@
         </header>
 
         <main>
-            <body>
+            <section>
                 <h2 class="order_list_container"></h2>
                 <div
                     id="order_list_container"
                     class="order_list_container"
                 ></div>
                 <div id="button_container" class="button_container"></div>
-            </body>
+            </section>
 
             <script>
                 var buttonExist = false;
@@ -123,6 +123,7 @@
 
                             // 서브메뉴가 활성화되지 않도록 합니다.
                             var submenu = link.closest(".submenu");
+                            console.log("submenu:",submenu);
                             submenu.classList.remove("active");
                         });
                     });
@@ -130,15 +131,16 @@
 
                 document.addEventListener("DOMContentLoaded", function () {
                     var menuItemsWithSubmenu = document.querySelectorAll(
-                        ".menu-item + .submenu"
+                        ".menu > li > .submenu"
                     );
 
                     menuItemsWithSubmenu.forEach(function (submenu) {
+                        console.log("submenu: ",submenu);
                         var menuItem = submenu.previousElementSibling; // 메뉴 아이템 선택
 
                         menuItem.addEventListener("click", function (event) {
                             console.log(submenu);
-                            console.log(menuItem);
+                            console.log("menuItem:",menuItem);
                             event.preventDefault();
 
                             submenu.classList.toggle("active"); // 서브메뉴 토글
@@ -153,7 +155,7 @@
                 const menuIcon = document.querySelector(".menu-icon");
                 const menu = document.querySelector(".menu");
                 console.log(menuIcon);
-                menuIcon.addEventListener("click", () => {
+                menuIcon.addEventListener("click", function(event) {
                     menu.classList.toggle("active");
                 });
 
